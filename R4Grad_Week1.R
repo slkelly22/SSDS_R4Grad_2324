@@ -15,6 +15,9 @@ setwd()
 
 #What is Tidy Data? 
 
+#find a different dataset to use as an example and email to everyone or tell them where to download the csv file to their desktop
+SK_geology_7.10.23 <- read.csv("~/Desktop/SK_geology_7.10.23.csv")
+
 #Building a dataset / dataframe within R
 
 #the assignment operator
@@ -41,6 +44,18 @@ print(my_fav_colors)
 mean(my_fav_colors) #doesn't work; why? 
 
 #selecting in Base R with position [] or save to later session?
+
+#creating a basic dataset with Base R
+
+tea_ratings <- c(3, 2, 3, 4, 7)
+tea_type <- c("oolong", "black", "green", "white", "herbal")
+steep_time <- c(3.5, 4, 3, 4.5, 5)
+
+#note: have to have the same number of rows to combine like this
+tea_dataset <- data.frame(tea_type, steep_time, tea_ratings)
+View(tea_dataset)
+str(tea_dataset)
+
 
 #Understanding Packages
 #shows your downloaded packages
