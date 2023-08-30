@@ -82,5 +82,6 @@ library(tidyverse)
 #if you want help, you can use ? 
 ?mean
 
+#Next Week
 #reading in data
 SK_geology_7.10.23 <- read.csv("~/Desktop/SK_geology_7.10.23.csv")
