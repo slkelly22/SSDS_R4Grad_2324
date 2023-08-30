@@ -6,21 +6,34 @@
 #setting up your directory
 getwd()
 setwd()
-#always know where you are in your files? saving your files vs. saving your workspace
+#always know where you are in your files; saving your files vs. saving your workspace
 #what is a project in R?
 
 #getting to know Base R
 #R is case sensitive
 #most of the mistakes you'll make in R are spelling errors [or not loading libraries]
+#tearatings is not the same as Tearatings
 
 #What is Tidy Data? 
 
-#find a different dataset to use as an example and email to everyone or tell them where to download the csv file to their desktop
-SK_geology_7.10.23 <- read.csv("~/Desktop/SK_geology_7.10.23.csv")
+#the assignment operator & data types in R
+fav_number <- 10
+fav_numbers <- c(10, 5, 17)
+str(fav_numbers)
+mean(fav_numbers)
 
-#Building a dataset / dataframe within R
+#be careful of overwriting your objects! 
+fav_number <- "ten"
+#categorical data
+my_fav_colors <- c("olive green", "mustard yellow", "dark grey")
+print(my_fav_colors)
+str(my_fav_colors)
+mean(my_fav_colors) #why doesn't that work? 
 
-#the assignment operator
+#logical
+liked_movie <- c(TRUE, FALSE, TRUE)
+str(liked_movie)
+mean(liked_movie)
 
 #naming conventions
 01var <- c(3, 2, 3, 4, 7) #that doesn't work
@@ -31,6 +44,7 @@ tea_ratings <- c(3, 2, 3, 4, 7)
 mean(tea_ratings)
 tea_ratings *5
 
+#logical comparisons
 tea_ratings <= 3 #returns a logical vector
 tea_ratings !=3
 
@@ -38,14 +52,8 @@ tea_ratings !=3
 rm(var01)
 #Be careful: you can easily write over objects and entire dataframes if you use the same name
 
-#what is you have categorical data? 
-my_fav_colors <- c("olive green", "mustard yellow", "dark grey")
-print(my_fav_colors)
-mean(my_fav_colors) #doesn't work; why? 
-
-#selecting in Base R with position [] or save to later session?
-
 #creating a basic dataset with Base R
+#assignment operator is <-
 
 tea_ratings <- c(3, 2, 3, 4, 7)
 tea_type <- c("oolong", "black", "green", "white", "herbal")
@@ -56,7 +64,6 @@ tea_dataset <- data.frame(tea_type, steep_time, tea_ratings)
 View(tea_dataset)
 str(tea_dataset)
 
-
 #Understanding Packages
 #shows your downloaded packages
 library()
@@ -64,7 +71,7 @@ library()
 #how to download a package, put package name in parentheses; alternatively, use Packages - Install button
 intall.packages("tidyverse")
 
-#shows you active packages
+#shows you active (loaded) packages
 search()
 
 #loads the tidyverse package so you can use it
@@ -75,4 +82,5 @@ library(tidyverse)
 #if you want help, you can use ? 
 ?mean
 
-#assignment operator is <-
+#reading in data
+SK_geology_7.10.23 <- read.csv("~/Desktop/SK_geology_7.10.23.csv")
