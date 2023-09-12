@@ -32,6 +32,9 @@ library(readxl)
 squirrels_data <- read.csv("~/Desktop/Abbrev_Central_Park_Squirrels_2018.csv")
 
 #Alternative: reading in with readr and then grabbing code
+library(readr)
+Abbrev_Central_Park_Squirrels_2018 <- read_csv("Abbrev_Central_Park_Squirrels_2018.csv")
+View(Abbrev_Central_Park_Squirrels_2018)
 
 View(squirrels_data)
 nrow(squirrels_data)
