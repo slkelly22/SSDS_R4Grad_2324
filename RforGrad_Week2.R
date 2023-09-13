@@ -20,11 +20,13 @@ library(tidyverse)
 #if you want help, you can use ? 
 ?tidyverse
 ?ggplot2
+?select
 
 #let's also install readxl
 install.packages("readxl")
 library(readxl)
 ?readxl
+
 ?read.csv #What's this, and do we have access to it automatically? Hint: run search() again
 
 #Reading in data
@@ -38,13 +40,14 @@ Abbrev_Central_Park_Squirrels_2018 <- read_csv("Abbrev_Central_Park_Squirrels_20
 View(Abbrev_Central_Park_Squirrels_2018)
 
 
+View(Abbrev_Central_Park_Squirrels_2018)
 
 View(squirrels_data)
 nrow(squirrels_data)
 ncol(squirrels_data)
 dim(squirrels_data)
 
-head(squirrels_data)
+head(squirrels_data, 2)
 tail(squirrels_data, 15)
 
 #base R
