@@ -12,3 +12,11 @@ squirrels_data %>%
   count(shift, age) 
 
 #also should answer the lubridate / date --> back to number issue from last week
+
+#let's cover logical operators: %in%  ==  & |, etc. 
+#tidy verbs:
+# select
+# filter
+# mutate
+# arrange
+# summarize
