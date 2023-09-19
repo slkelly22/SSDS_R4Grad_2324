@@ -13,6 +13,23 @@ squirrels_data %>%
 
 #also should answer the lubridate / date --> back to number issue from last week
 
+#Rather than uploading a dataset, we'll practice using datasets that already exist within R packages
+install.packages("fivethirtyeight")
+library(fivethirtyeight)
+?fivethirtyeight
+data(package = "fivethirtyeight")
+View(fandango)
+
+#add this to my things to remember code; this tells you the datasets that live within that package
+data(package = "palmerpenguins")
+data(package = "gapminder")
+data(package = "moderndive")
+data(package = "lavaan")
+
+#what about how to call a function from within a package that isn't loaded
+dplyr::select
+#yeah but will the %>% work without loading tidy? 
+
 #let's cover logical operators: %in%  ==  & |, etc. 
 #tidy verbs:
 # select
@@ -20,3 +37,30 @@ squirrels_data %>%
 # mutate
 # arrange
 # summarize
+
+
+library(tidyverse)
+library(fivethirtyeight)
+search() #what does this do again? 
+
+dim(fandango) #146, 23
+View(fandango)
+head(fandango, 10)
+head(fandango$film, 10) #you can even call head or tails on a particular variable 
+tail(fandango$year, 5)
+
+#Base R: Dollar signs and brackets
+#Dollar sign
+fandango$film
+
+#brackets [row, column]
+fandango[, "film"]
+fandango[, 1]
+
+#Tidyverse: piping and select function
+fandango %>% select(film)
+#generally set up like this: 
+fandango %>%
+  select(film) #note: there's nothing permanent because we are not making new objects
+
+
