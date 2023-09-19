@@ -46,9 +46,10 @@ search() #what does this do again?
 dim(fandango) #146, 23
 View(fandango)
 head(fandango, 10)
-head(fandango$film, 10) #you can even call head or tails on a particular variable 
+head(fandango$film, 10) #you can even call head or tails on a particular variable; add this to my yellow notebook too
 tail(fandango$year, 5)
 
+#How do we grab columns / variables? 
 #Base R: Dollar signs and brackets
 #Dollar sign
 fandango$film
@@ -63,4 +64,35 @@ fandango %>% select(film)
 fandango %>%
   select(film) #note: there's nothing permanent because we are not making new objects
 
+#what do these do? 
+fandango %>%
+  select(-fandango_difference)
 
+fandango %>%
+  select(film:metacritic)
+
+fandango %>%
+  select(starts_with("metacritic"))
+
+#how do I know what arguments exist? 
+?select
+
+#you can combine
+fandango %>%
+  select(film, year, rt_norm:metacritic_norm, fandango_difference) 
+
+#Do a Task here
+
+#How do we grab observations? 
+#Base R: dollar sign and subset
+#Tidy: pipe and filter
+
+#here is where we need to go over logical comparisons and boolean
+
+#Base R: 
+subset(fandango, subset = fandango$year == 2015)
+#Tidy: 
+fandango %>%
+  filter(year == 2015)
+
+#Task: How many movies have an IMBD rating greater than 8?          
