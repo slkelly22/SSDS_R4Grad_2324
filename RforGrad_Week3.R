@@ -30,7 +30,6 @@ data(package = "lavaan")
 dplyr::select
 #yeah but will the %>% work without loading tidy? 
 
-#let's cover logical operators: %in%  ==  & |, etc. 
 #tidy verbs:
 # select
 # filter
@@ -38,6 +37,7 @@ dplyr::select
 # arrange
 # summarize
 
+# add COUNT - did we do last week?
 
 library(tidyverse)
 library(fivethirtyeight)
@@ -88,6 +88,7 @@ fandango %>%
 #Tidy: pipe and filter
 
 #here is where we need to go over logical comparisons and boolean
+#let's cover logical operators: %in%  == , etc & is AND, | is OR, ! is NOT
 
 #Base R: 
 subset(fandango, subset = fandango$year == 2015)
@@ -96,3 +97,27 @@ fandango %>%
   filter(year == 2015)
 
 #Task: How many movies have an IMBD rating greater than 8?          
+#Base R: 
+subset(fandango, subset = fandango$IMBD > 8)
+#Tidy: 
+fandango %>%
+  filter(year > 8)
+
+#combo task
+#How many movies in the fandango dataset were from 2014 and had an rottentomatoes rating less than 30? #Hint: use filter (not select)
+
+fandango %>%
+  filter(year == 2014 & rottentomatoes < 30)
+#Film: Annie
+
+#mutate
+#Mutate allow you to create a new variable from an existing one
+
+#creating a new standardized measure
+sk_fandango <- fandango %>%
+  mutate(z_fandango_votes = scale(fandang0_votes)
+#lots of ways to change variables...
+#mutate(new variable = old variable / 12)
+#mutate(new variable = log(old variable))
+
+#how to change our dataset and then save to a new object, then export
