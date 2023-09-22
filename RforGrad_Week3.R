@@ -11,43 +11,69 @@ squirrels_data <- read.csv("~/Desktop/Abbrev_Central_Park_Squirrels_2018.csv")
 squirrels_data %>%
   count(shift, age) 
 
-#also should answer the lubridate / date --> back to number issue from last week
+########
+#if time: discuss the lubridate/date --> back to number issue from last week
+#######
 
-#Rather than uploading a dataset, we'll practice using datasets that already exist within R packages
+#Rather than uploading a dataset, we're going to use datasets that already exist within R packages
 install.packages("fivethirtyeight")
 library(fivethirtyeight)
 ?fivethirtyeight
 data(package = "fivethirtyeight")
-View(fandango)
 
-#add this to my things to remember code; this tells you the datasets that live within that package
-data(package = "palmerpenguins")
-data(package = "gapminder")
-data(package = "moderndive")
+#another example is lavaan, an SEM package
+#note: you have to have the library installed in order to call the data out
+install.packages("lavaan")
 data(package = "lavaan")
 
-#what about how to call a function from within a package that isn't loaded
-dplyr::select
-#yeah but will the %>% work without loading tidy? 
+#back to the fivethirtyeight package that includes a dataset called fandango
+View(fandango)
+summary(fandango)
+glimpse(fandango)
 
-#tidy verbs:
-# select
-# filter
-# mutate
-# arrange
-# summarize
+#should we change the year with lubridate? 
+str(fandango$year)
+library(lubridate)
+?lubridate
+#hot mess; only do if we have time 
+?year
+year(fandango$year)
+epiyear(fandango$year)
+isoyear(fandango$year) 
+fandango$year <- as.Date(fandango$year) #nope to all this
+rm(fandango)
 
-# add COUNT - did we do last week? what about unique
+
+#Tidy functions / verbs to discuss today; remember to load tidyverse package beforehand
+?count #we learned last week; not using count here becuase we have numerical data, not categorical groupings
+#new verbs: select, filter, mutate, arrange, summarize(?)
 
 library(tidyverse)
 library(fivethirtyeight)
-search() #what does this do again? 
+search() #remind what this does
 
 dim(fandango) #146, 23
 View(fandango)
 head(fandango, 10)
-head(fandango$film, 10) #you can even call head or tails on a particular variable; add this to my yellow notebook too
+head(fandango$film, 10) #you can even call head or tails on a particular variable
 tail(fandango$year, 5)
+
+
+#How do we sort / reorder a dataset? 
+#arrange is part of dplyr
+
+fandango %>%
+  arrange(rottentomatoes) %>%
+  head(5) #default is ascending
+
+fandango %>%
+  arrange(desc(rottentomatoes)) %>% #you can change to a descending order
+  head(5)
+
+fandango %>%
+  arrange(rottentomatoes, desc(year)) %>%
+  head(5)
+#now why does it not stay like that? becuase you didn't send it to a new object
 
 #How do we grab columns / variables? 
 #Base R: Dollar signs and brackets
