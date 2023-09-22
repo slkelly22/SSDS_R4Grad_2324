@@ -37,7 +37,7 @@ dplyr::select
 # arrange
 # summarize
 
-# add COUNT - did we do last week?
+# add COUNT - did we do last week? what about unique
 
 library(tidyverse)
 library(fivethirtyeight)
