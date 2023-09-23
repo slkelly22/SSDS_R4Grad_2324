@@ -3,7 +3,6 @@
 #S.Kelly
 
 library(tidyverse)
-
 squirrels_data <- read.csv("~/Desktop/Abbrev_Central_Park_Squirrels_2018.csv")
 
 ?count
@@ -11,11 +10,9 @@ squirrels_data <- read.csv("~/Desktop/Abbrev_Central_Park_Squirrels_2018.csv")
 squirrels_data %>%
   count(shift, age) 
 
-########
-#if time: discuss the lubridate/date --> back to number issue from last week
-#######
-
-#Rather than uploading a dataset, we're going to use datasets that already exist within R packages
+#New content
+#Rather than uploading an external dataset, we're going to use datasets that already exist within R packages
+#we need to install (if you don't have it) and load the fivethirtyeight package
 install.packages("fivethirtyeight")
 library(fivethirtyeight)
 ?fivethirtyeight
@@ -27,30 +24,21 @@ install.packages("lavaan")
 data(package = "lavaan")
 
 #back to the fivethirtyeight package that includes a dataset called fandango
-View(fandango)
-summary(fandango)
-glimpse(fandango)
-
-#should we change the year with lubridate? 
-str(fandango$year)
-library(lubridate)
-?lubridate
-#hot mess; only do if we have time 
-?year
-year(fandango$year)
-epiyear(fandango$year)
-isoyear(fandango$year) 
-fandango$year <- as.Date(fandango$year) #nope to all this
-rm(fandango)
+#Let's get a quick overview of the dataset using the functions we've already learned
+library(tidyverse) #load tidy if you haven't already
+View(fandango) #base
+dim(fandango) #base
+summary(fandango) #base R
+glimpse(fandango) #this is a tidy function, from dplyr
 
 
-#Tidy functions / verbs to discuss today; remember to load tidyverse package beforehand
-?count #we learned last week; not using count here becuase we have numerical data, not categorical groupings
-#new verbs: select, filter, mutate, arrange, summarize(?)
+#Tidy functions / verbs to discuss today
+#we learned count() last week; not using count here because we have numerical data, not categorical groupings
+#new verbs: ARRANGE, SELECT, FILTER, MUTATE
 
 library(tidyverse)
 library(fivethirtyeight)
-search() #remind what this does
+search() #this tells you what packages are activated and available to use
 
 dim(fandango) #146, 23
 View(fandango)
@@ -149,3 +137,20 @@ sk_fandango <- fandango %>%
 #mutate(new variable = log(old variable))
 
 #how to change our dataset and then save to a new object, then export
+
+########
+#if time: discuss the lubridate/date --> back to number issue from last week
+#######
+#should we change the year with lubridate? 
+str(fandango$year)
+library(lubridate)
+?lubridate
+#hot mess; only do if we have time 
+?year
+year(fandango$year)
+epiyear(fandango$year)
+isoyear(fandango$year) 
+fandango$year <- as.Date(fandango$year) #nope to all this
+rm(fandango)
+
+#we'll introduce tidy's summarize() in week 4 to use with collapsing data in gapminder
