@@ -73,7 +73,7 @@ fandango %>%
 fandango %>%
   arrange(rottentomatoes, desc(year)) %>%
   head(5)
-#now why does it not stay like that? becuase you didn't send it to a new object
+#now why does it not stay like that? because you didn't create a new object
 
 #How do we grab columns / variables? 
 #Base R: Dollar signs and brackets
@@ -113,8 +113,10 @@ fandango %>%
 #Base R: dollar sign and subset
 #Tidy: pipe and filter
 
-#here is where we need to go over logical comparisons and boolean
-#let's cover logical operators: %in%  == , etc & is AND, | is OR, ! is NOT
+#here is where we need to go over logical comparisons and Boolean
+# >, <, ==, %in%
+#& is AND, | is OR, ! is NOT
+#we'll need to practice this info
 
 #Base R: 
 subset(fandango, subset = fandango$year == 2015)
