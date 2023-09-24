@@ -25,27 +25,22 @@ data(package = "lavaan")
 
 #back to the fivethirtyeight package that includes a dataset called fandango
 #Let's get a quick overview of the dataset using the functions we've already learned
-library(tidyverse) #load tidy if you haven't already
+
 View(fandango) #base
 dim(fandango) #base
 summary(fandango) #base R
-glimpse(fandango) #this is a tidy function, from dplyr
 
+head(fandango, 10)
+head(fandango$film, 10) #you can even call head or tails on a particular variable
+tail(fandango$film, 5)
 
 #Tidy functions / verbs to discuss today
 #we learned count() last week; not using count here because we have numerical data, not categorical groupings
 #new verbs: ARRANGE, SELECT, FILTER, MUTATE
 
 library(tidyverse)
-library(fivethirtyeight)
 search() #this tells you what packages are activated and available to use
-
-dim(fandango) #146, 23
-View(fandango)
-head(fandango, 10)
-head(fandango$film, 10) #you can even call head or tails on a particular variable
-tail(fandango$year, 5)
-
+glimpse(fandango) #this is a tidy function, from dplyr
 
 #How do we sort / reorder a dataset? 
 #arrange is part of dplyr
@@ -61,7 +56,8 @@ fandango %>%
 fandango %>%
   arrange(rottentomatoes, desc(year)) %>%
   head(5)
-#now why does it not stay like that? because you didn't create a new object
+View(fandango)
+#Is the reordering permanent? 
 
 #How do we grab columns / variables? 
 #Base R: Dollar signs and brackets
@@ -91,14 +87,12 @@ fandango %>%
 #how do I know what arguments exist? 
 ?select
 
-#you can combine
+#you can combine; have them run this code
 fandango %>%
   select(film, year, rt_norm:metacritic_norm, fandango_difference) 
 
-#Do a Task here
-
 #How do we grab observations? 
-#Base R: dollar sign and subset
+#Base R: and subset
 #Tidy: pipe and filter
 
 #here is where we need to go over logical comparisons and Boolean
@@ -114,10 +108,10 @@ fandango %>%
 
 #Task: How many movies have an IMBD rating greater than 8?          
 #Base R: 
-subset(fandango, subset = fandango$IMBD > 8)
+subset(fandango, subset = fandango$imdb > 8)
 #Tidy: 
 fandango %>%
-  filter(year > 8)
+  filter(imdb > 8)
 
 #combo task
 #How many movies in the fandango dataset were from 2014 and had an rottentomatoes rating less than 30? #Hint: use filter (not select)
@@ -131,7 +125,7 @@ fandango %>%
 
 #creating a new standardized measure
 sk_fandango <- fandango %>%
-  mutate(z_fandango_votes = scale(fandang0_votes)
+  mutate(z_metacritic = scale(metacritic)
 #lots of ways to change variables...
 #mutate(new variable = old variable / 12)
 #mutate(new variable = log(old variable))
