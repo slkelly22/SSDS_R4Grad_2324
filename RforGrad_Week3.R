@@ -55,7 +55,7 @@ fandango %>%
 
 fandango %>%
   arrange(rottentomatoes, desc(year)) %>%
-  head(5)
+  head(10)
 View(fandango)
 #Is the reordering permanent? 
 
@@ -87,7 +87,7 @@ fandango %>%
 #how do I know what arguments exist? 
 ?select
 
-#you can combine; have them run this code
+#you can combine
 fandango %>%
   select(film, year, rt_norm:metacritic_norm, fandango_difference) 
 
@@ -125,13 +125,18 @@ fandango %>%
 
 #creating a new standardized measure
 sk_fandango <- fandango %>%
-  mutate(z_metacritic = scale(metacritic)
+  mutate(z_metacritic = scale(metacritic))
+
+cor(sk_fandango$metacritic, sk_fandango$z_metacritic) #correlation is 1
+
 #lots of ways to change variables...
 #mutate(new variable = old variable / 12)
 #mutate(new variable = log(old variable))
 
-#how to change our dataset and then save to a new object, then export
+#Next week: moving into ggplot and learning more functions like summarize and group_by
 
+###########################
+#how to change our dataset and then save to a new object, then export
 ########
 #if time: discuss the lubridate/date --> back to number issue from last week
 #######
