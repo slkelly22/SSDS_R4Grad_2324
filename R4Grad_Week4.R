@@ -6,6 +6,7 @@ install.packages("palmerpenguins")
 library(palmerpenguins) 
 data(package = "palmerpenguins")
 
+search()
 
 #Let's take a look at the penguins dataset
 View(penguins)
@@ -30,6 +31,7 @@ ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g)) +
 #let's see if the relationship varies by penguin species by mapping color
 ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)) + geom_point()
 
+ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g)) + geom_point(color = "blue")
 
 #what happens if you use a continuous variable for the color mapping? 
 ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g, color = bill_length_mm)) + geom_point()
@@ -39,10 +41,12 @@ ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g, co
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, color = sex)) + geom_point() 
 
 #color species
-ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, color = species)) + geom_point() 
+ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, color = species)) + geom_point() + facet_wrap(~species)
 
 #differentiating with shapes 
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, shape = species)) + geom_point() 
+
+ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, shape = species)) + geom_point() + facet_wrap(~island)
 
 #differentiating with shapes and color
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, shape = species, color = species)) + geom_point() 
@@ -52,7 +56,8 @@ ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, sha
 
 #adding size
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, shape = species, color = species)) + geom_point(size = 4) 
-
+ggsave("Savannahs_Plot.png")
+?ggsave
 
 #final plot
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, shape = species, color = species)) + geom_point(size = 4) + labs(x = "Bill Length (mm)", y = "Bill Depth (mm)", title = "Antarctic Adult Penguins", caption = "Palmer Station, Antartica", subtitle = "Relationship between Bill Length, Bill Depth, and Species")
