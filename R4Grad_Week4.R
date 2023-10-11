@@ -41,8 +41,30 @@ ggsave("penguin_bill_sex.png")
 ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, color = species)) + geom_point() 
 ggsave("penguin_bill_species.png")
 
-#let's save our plot
+#differentiating with shapes 
+ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, shape = species)) + geom_point() 
 
+#differentiating with shapes and color
+ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, shape = species, color = species)) + geom_point() 
+
+#you can mixed shape and color to different categorical variables but too many elements can confuse the viewer
+ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, shape = species, color = island)) + geom_point() 
+
+ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, shape = species, color = species)) + geom_point(size = 4) 
+ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm)) + geom_point(shape = 8) 
+
+ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, color = species, shape = species)) + geom_point() 
+
+ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, color = species)) + geom_point(size = 10) 
+ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, color = species, size = 10)) + geom_point() 
+
+#final plot
+ggplot(data = penguins, mapping = aes(x = bill_length_mm, y = bill_depth_mm, shape = species, color = species)) + geom_point(size = 4) + labs(x = "Bill Length (mm)", y = "Bill Depth (mm)", title = "Antarctic Adult Penguins", caption = "Palmer Station, Antartica", subtitle = "Relationship between Bill Length, Bill Depth, and Species")
+ggsave("FinalPenguinPlot.png")
+
+
+
+#Extra: ggeasy
 install.packages("ggeasy")
 library(ggeasy)
 
