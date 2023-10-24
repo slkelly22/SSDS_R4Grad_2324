@@ -1,6 +1,10 @@
 #R4Grad Week 5 Syntax - Plotting with ggplot2 continued
 
-library(tidyverse, gapminder, palmerpenguins)
+library(tidyverse)
+library(gapminder) 
+library(palmerpenguins)
+
+search()
 
 View(penguins)
 #Returning back to the scatterplots
@@ -25,6 +29,7 @@ ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g)) +
 
 library(gapminder)
 View(gapminder)
+dim(gapminder)
 ?gapminder
 
 ggplot(gapminder, mapping = aes(x = log(gdpPercap), y = lifeExp, color = continent)) + geom_point()
@@ -43,7 +48,7 @@ ggplot(gapminder, mapping = aes(x = log(gdpPercap), y = lifeExp, color = contine
 
 #let's look at the same information but just within a single continent and year and mapping to size of the population
 gapminder %>%
-  filter(continent == "Europe") %>%
+  filter(continent == "Africa") %>%
   filter(year == 2007) %>%
   ggplot(mapping = aes(x = log(gdpPercap),y = lifeExp, color = country, size = pop)) + geom_point()
 
@@ -51,23 +56,10 @@ gapminder %>%
   filter(year == 2007) %>%
   ggplot(mapping = aes(x = lifeExp)) + geom_histogram()
 
-
-________
-#introducing the gapminder data
-library(gapminder)
-
-View(gapminder)
-
-ggplot(gapminder, mapping = aes(x = log(gdpPercap),y = lifeExp)) + geom_point()
-
-ggplot(gapminder, mapping = aes(x = log(gdpPercap), y = lifeExp, color = continent)) + geom_point() + labs(x = "GDP per Capita", y = "Life Expectancy", title = "Gapminder Data", caption = "Data 2017") + facet_wrap(~continent)
-
-#shape
-ggplot(gapminder, mapping = aes(x = log(gdpPercap), y = lifeExp, color = continent)) + geom_point(shape = 17) + labs(x = "GDP Per Capita", y = "Life Expectancy", color = "Continent")
-
-ggplot(gapminder, mapping = aes(x = log(gdpPercap), y = lifeExp, color = continent, shape = continent)) + geom_point() + labs(x = "GDP Per Capita", y = "Life Expectancy", color = "Continent")
-
+#Histograms
+#a basic histogram
 ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram()
+
 
 ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "white") 
 
@@ -79,44 +71,17 @@ ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "w
 
 ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "white", fill = "blue", binwidth = 10) + facet_wrap(~continent)
 
-#line graph
-gapminder %>%
-  filter(continent == "Asia") %>%
-  ggplot(gapminder, mapping = aes(x = year, y = lifeExp, color = country)) + geom_line()
-#code does the same thing as above
-ggplot(data = gapminder, mapping = aes(x = year, y = lifeExp, color = country)) + geom_line(data = filter(gapminder, continent == "Asia"))
 
-#hands-on activity
-gapminder %>%
-  filter(continent == "Americas") %>%
-  ggplot(gapminder, mapping = aes(x = year, y = lifeExp, color = country)) + geom_line() + labs(x = "Year", y = "Life Expectancy", title = "Life Expectancy in the Americas", color = "Country", caption = "Gapminder Data")
-
-#boxplot
-library(openintro)
-View(run17)
-?run17
-
-#basic boxplot
-
-#now with a mutated variable
-
-ggplot(run17, mapping = aes(x = event, y = clock_sec)) + geom_boxplot(fill = "maroon") + labs(x = "Race Event", y = "Finish Time (in seconds)", title = "Cherry Blossom Run, 2017")
-
-run17 %>%
-  mutate(clock_min = clock_sec/60) %>%
-  ggplot(run17, mapping = aes(x = event, y = clock_min)) + geom_boxplot(fill = "maroon") + labs(x = "Race Event", y = "Finish Time (in minutes)", title = "Cherry Blossom Run, 2017")
-
-gapminder %>%
-  filter(continent == "Africa") %>%
-  ggplot(gapminder, mapping = aes(x = country, y = lifeExp)) + geom_boxplot(fill = "orange") + coord_flip()
-
-?geom_density
-ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_density() + facet_wrap(~continent)
-
+#geom_density
+#basic density
+ggplot(gapminder, mapping = aes(x = lifeExp)) + geom_density()
+#density with color aes
+ggplot(gapminder, mapping = aes(x = lifeExp, color = continent)) + geom_density()
+#density with color and fill aes
+ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent)) + geom_density()
+#density with color and fill and alpha
+ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent, alpha = .5)) + geom_density()
 
 library(RColorBrewer)
 ?RColorBrewer
 
-gapminder %>%
-  filter(continent == "Asia") %>%
-  ggplot(gapminder, mapping = aes(x = year, y = lifeExp, color = country)) + geom_line(linetype = 'dashed') + scale_color_brewer(palette = "Paired")
