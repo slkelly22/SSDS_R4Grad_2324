@@ -7,7 +7,7 @@ library(palmerpenguins)
 search()
 
 View(penguins)
-#Returning back to the scatterplots
+#Returning back to scatterplots
 
 #here we are plotting the penguin data from last week, with species represented by color
 ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)) + geom_point()
@@ -26,7 +26,7 @@ ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g)) +
 #here's how to retain the color mapping
 ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g)) + geom_point(mapping = aes(color = species)) + geom_smooth(method = "lm", se = FALSE)
 
-
+#switching datasets
 library(gapminder)
 View(gapminder)
 dim(gapminder)
@@ -60,7 +60,6 @@ gapminder %>%
 #a basic histogram
 ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram()
 
-
 ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "white") 
 
 ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "white", fill = "blue")
@@ -69,8 +68,12 @@ ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "w
 
 ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "white", fill = "blue", binwidth = 10)
 
-ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "white", fill = "blue", binwidth = 10) + facet_wrap(~continent)
+ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "white", fill = "plum4", binwidth = 10) + facet_wrap(~continent)
 
+#color and fill
+#Picking a color: R has 657 built-in named colours, which can be listed with colours().
+colours()
+colors()
 
 #geom_density
 #basic density
@@ -80,8 +83,31 @@ ggplot(gapminder, mapping = aes(x = lifeExp, color = continent)) + geom_density(
 #density with color and fill aes
 ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent)) + geom_density()
 #density with color and fill and alpha
-ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent, alpha = .5)) + geom_density()
+ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent)) + geom_density(alpha = .3)
 
-library(RColorBrewer)
-?RColorBrewer
+#alpha mapped to continent
+ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent, alpha = continent)) + geom_density()
+
+
+#mapping to a variable needs an aes() -- globally or locally -- whereas mapping to a constant that is external to your dataset (color = "blue", alpha = .7) doesn't need aes()
+
+library(ggeasy)
+#let's make this look nicer
+#ggeasy allows us to remove the legends we don't want
+
+
+ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent)) + geom_density(alpha = 0.2) + labs(y = NULL, x = "Life Expectancy", fill = "Continent", title = "Worldwide Life Expectancy (1952 - 2007)", subtitle = "Gapminder Data") 
+
+ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent)) + geom_density(color = "blue") + labs(y = NULL, x = "Life Expectancy", fill = "Continent", title = "Worldwide Life Expectancy (1952 - 2007)", subtitle = "Gapminder Data") 
+
+ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent)) + geom_density(alpha = 0.4) + labs(y = NULL, x = "Life Expectancy", fill = "Continent", title = "Worldwide Life Expectancy (1952 - 2007)", subtitle = "Gapminder Data") + easy_remove_legend(alpha, color) + theme_minimal()
+
+#then ggsave() if you want
+
+
+#commons themes
++ theme_minimal()
++ theme_classic()
++ theme_bw()
++ theme_dark()
 
