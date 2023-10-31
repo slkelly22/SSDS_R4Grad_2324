@@ -39,6 +39,7 @@ gapminder %>%
   filter(continent == "Asia") %>%
   ggplot(mapping = aes(x = log(gdpPercap),y = lifeExp, color = country)) + geom_point(size = 3)
 
+#didn't show but move to next week
 gapminder %>%
   filter(country == "Argentina") %>%
   ggplot(mapping = aes(x = lifeExp, y = year)) + geom_line()
@@ -68,7 +69,7 @@ ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "w
 
 ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "white", fill = "blue", binwidth = 10)
 
-ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "white", fill = "plum4", binwidth = 10) + facet_wrap(~continent)
+ggplot(data = gapminder, mapping = aes(x = lifeExp)) + geom_histogram(color = "white", fill = "violetred", binwidth = 10) + facet_wrap(~continent)
 
 #color and fill
 #Picking a color: R has 657 built-in named colours, which can be listed with colours().
@@ -100,6 +101,7 @@ ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent
 
 ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent)) + geom_density(color = "blue") + labs(y = NULL, x = "Life Expectancy", fill = "Continent", title = "Worldwide Life Expectancy (1952 - 2007)", subtitle = "Gapminder Data") 
 
+library(ggeasy)
 ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent)) + geom_density(alpha = 0.4) + labs(y = NULL, x = "Life Expectancy", fill = "Continent", title = "Worldwide Life Expectancy (1952 - 2007)", subtitle = "Gapminder Data") + easy_remove_legend(alpha, color) + theme_minimal()
 
 #then ggsave() if you want
