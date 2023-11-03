@@ -65,3 +65,48 @@ county_data %>%
   ggplot(mapping = aes(x = reorder(state, hh_income), y = hh_income)) + geom_boxplot() + coord_flip()
 
 #Geom_Bar with Geom_Col
+#Question: Is your data pre-counted or not? 
+#Not pre counted --> use geom_bar(), x = category
+#Pre counted --> use geom_col(), x = category, y = counted number
+
+county_data %>%
+  ggplot(mapping = aes(x = census_region)) + geom_bar()
+
+#fill does a stacked bar plot
+county_data %>%
+  ggplot(mapping = aes(x = census_region, fill = state)) + geom_bar()
+
+#see if there's a difference between drop_na() and drop_na(c(var1, var2))
+county_data %>%
+  drop_na(c(census_region, partywinner16)) %>%
+  ggplot(mapping = aes(x = census_region, fill = partywinner16)) + geom_bar()
+
+#you can do a dodged barplot with the argument position = "dodge"
+county_data %>%
+  drop_na(c(census_region, partywinner16)) %>%
+  ggplot(mapping = aes(x = census_region, fill = partywinner16)) + geom_bar(position = "dodge")
+
+county_data %>%
+  drop_na() %>%
+  ggplot(mapping = aes(x = census_region, fill = partywinner16)) + geom_bar()
+#they look the same. There might not be much missing in these vars...let's check
+
+sum(is.na(county_data)) #950
+sum(is.na(county_data$census_region)) #1
+sum(is.na(county_data$partywinner16)) #54
+
+#let's check this way
+
+county_data %>%
+  drop_na(c(census_region, partywinner16)) %>%
+  count(census_region, partywinner16) 
+
+county_data %>%
+  drop_na() %>%
+  count(census_region, partywinner16) 
+#the only differnce I see is that the first code has 336 for West Repulican and the second code has 307
+
+summary(county_data)
+
+#what if we want a bar chart for proportions rather than counts? -- see R for DS (2), p. 132
+ggplot(county_data, mapping = aes(x = partywinner16, y = after_stat(prop), group = 1)) + geom_bar()
