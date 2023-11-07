@@ -103,7 +103,6 @@ county_data %>%
   drop_na() %>%
   ggplot(mapping = aes(x = census_region, fill = partywinner16)) + geom_bar(position = "dodge")
 
-
 #what if we want a bar chart for proportions rather than counts? 
 county_data %>%
   drop_na() %>%
