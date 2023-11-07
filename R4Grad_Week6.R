@@ -88,41 +88,28 @@ county_data %>%
 county_data %>%
   ggplot(mapping = aes(x = census_region)) + geom_bar()
 
-#fill does a stacked bar plot
+#if we drop the NAs and then plot
 county_data %>%
-  ggplot(mapping = aes(x = census_region, fill = state)) + geom_bar()
+  drop_na() %>%
+  ggplot(mapping = aes(x = census_region)) + geom_bar()
 
-#see if there's a difference between drop_na() and drop_na(c(var1, var2))
+#fill does a stacked barchart
 county_data %>%
-  drop_na(c(census_region, partywinner16)) %>%
+  drop_na() %>%
   ggplot(mapping = aes(x = census_region, fill = partywinner16)) + geom_bar()
 
 #you can do a dodged barplot with the argument position = "dodge"
 county_data %>%
-  drop_na(c(census_region, partywinner16)) %>%
+  drop_na() %>%
   ggplot(mapping = aes(x = census_region, fill = partywinner16)) + geom_bar(position = "dodge")
 
+
+#what if we want a bar chart for proportions rather than counts? 
 county_data %>%
   drop_na() %>%
-  ggplot(mapping = aes(x = census_region, fill = partywinner16)) + geom_bar()
-#they look the same. There might not be much missing in these vars...let's check
+  ggplot(mapping = aes(x = partywinner16, y = after_stat(prop), group = 1)) + geom_bar(color = "black", fill = "skyblue3")
 
-sum(is.na(county_data)) #950
-sum(is.na(county_data$census_region)) #1
-sum(is.na(county_data$partywinner16)) #54
 
-#let's check this way
-
-county_data %>%
-  drop_na(c(census_region, partywinner16)) %>%
-  count(census_region, partywinner16) 
-
-county_data %>%
-  drop_na() %>%
-  count(census_region, partywinner16) 
-#the only differnce I see is that the first code has 336 for West Repulican and the second code has 307
-
-summary(county_data)
-
-#what if we want a bar chart for proportions rather than counts? -- see R for DS (2), p. 132
-ggplot(county_data, mapping = aes(x = partywinner16, y = after_stat(prop), group = 1)) + geom_bar()
+colors()
+# another way to drop NAs
+drop_na(c(census_region, partywinner16)) 
