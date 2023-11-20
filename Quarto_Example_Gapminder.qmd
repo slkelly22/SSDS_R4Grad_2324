@@ -1,0 +1,38 @@
+---
+title: "Quarto Example: Gapminder Data"
+author: "S. Kelly"
+format: html
+editor: visual
+code-fold: true
+code-overflow: wrap
+---
+
+## Introduction
+
+Here is where you might want to write text about
+your project.
+
+## Running Code
+
+Loading the required packages.
+
+```{r}
+#| warning: FALSE
+library(gapminder)
+library(tidyverse)
+```
+
+## Summary statistics for the gapminder data
+
+```{r}
+#| echo: false
+summary(gapminder)
+```
+
+## Mexican Life Expectancy
+
+```{r}
+gapminder %>%
+  filter(country == "Mexico") %>%
+  ggplot(mapping = aes(x = year, y = lifeExp)) + geom_line(linewidth = 2, color = "orchid") + labs(title = "Mexican Life Expectancy", x = "Year", y = "Life Expectancy")
+```
