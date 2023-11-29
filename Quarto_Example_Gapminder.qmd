@@ -9,8 +9,7 @@ code-overflow: wrap
 
 ## Introduction
 
-Here is where you might want to write text about
-your project.
+Here is where you might want to write text about your project.
 
 ## Running Code
 
@@ -36,3 +35,5 @@ gapminder %>%
   filter(country == "Mexico") %>%
   ggplot(mapping = aes(x = year, y = lifeExp)) + geom_line(linewidth = 2, color = "orchid") + labs(title = "Mexican Life Expectancy", x = "Year", y = "Life Expectancy")
 ```
+
+[UM Libraries](http://libraries.olemiss.edu)
