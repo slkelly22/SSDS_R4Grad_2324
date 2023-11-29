@@ -135,21 +135,3 @@ cor(sk_fandango$metacritic, sk_fandango$z_metacritic) #correlation is 1
 
 #Next week: moving into ggplot and learning more functions like summarize and group_by
 
-###########################
-#how to change our dataset and then save to a new object, then export
-########
-#if time: discuss the lubridate/date --> back to number issue from last week
-#######
-#should we change the year with lubridate? 
-str(fandango$year)
-library(lubridate)
-?lubridate
-#hot mess; only do if we have time 
-?year
-year(fandango$year)
-epiyear(fandango$year)
-isoyear(fandango$year) 
-fandango$year <- as.Date(fandango$year) #nope to all this
-rm(fandango)
-
-#we'll introduce tidy's summarize() in week 4 to use with collapsing data in gapminder
