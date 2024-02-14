@@ -15,7 +15,7 @@ search() #tells you which packages are loaded (turned on)
 # Let's import external data
 # After using the "Import Dataset" drop-down button, copy and paste the syntax below
 library(readr)
-urban_park <- read_csv("Spring 2024/Urban Park Ranger/Urban_Park_Ranger_Animal_Condition_Response_20240202.csv")
+urban_park <- read_csv("RforGrad_Spr2024/Urban Park Ranger/Urban_Park_Ranger_Animal_Condition_Response_20240202.csv")
 View(urban_park)
 # Note function: read_csv("pathway")
 # We'll also use: write_csv(object, "title.csv")
