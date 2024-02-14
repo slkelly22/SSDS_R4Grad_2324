@@ -2,14 +2,16 @@
 # Week 2
 # S.Kelly
 
+# Remember to open up a new R script, and comment your code
+
 # Last meeting we discussed how to install and load a package
-# install.packages("tidyverse)
+# install.packages("tidyverse")
 library(tidyverse)
 search() #tells you which packages are loaded (turned on)
 
 # How to get help
-?package
 ?function
+?package
 
 # R allows you to work with internal datasets, as well as load external datasets
 # Let's import external data
@@ -21,13 +23,45 @@ View(urban_park)
 # We'll also use: write_csv(object, "title.csv")
 
 
-#Let's get familiar with our dataset
+# Let's get familiar with our dataset
 nrow(urban_park)
 ncol(urban_park)
 dim(urban_park)
-summary(urban_park) #Base R
-glimpse(urban_park) #Tidyverse
+head(urban_park)
+head(urban_park, 10)
+tail(urban_park, 10)
 
-#looking for missing data
-is.na(urban_park)
-sum(is.na(urban_park))
+#Looking at the big picture
+summary(urban_park) #Base R
+glimpse(urban_park) #Tidyverse funciton
+
+# Quick package to review descriptive statistics
+install.packages("skimr")
+skimr::skim(urban_park)
+
+# Let's learn our first Tidyverse function from the dplyr package: count
+# dataset %>%
+   #  function(variable)
+
+urban_park %>%
+  count(Age)
+
+urban_park %>%
+  count(`Police Response`)
+
+# Rename function
+sk_urban_park <- urban_park %>%
+  rename(police_response = 'Police Response')
+
+View(sk_urban_park)          
+
+sk_urban_park %>%
+  count(police_response)
+
+police_urban <- sk_urban_park %>%
+  filter(police_response == TRUE)
+
+police_urban %>%
+  count(Borough)
+
+write_csv(police_urban, "police_urban.csv")
