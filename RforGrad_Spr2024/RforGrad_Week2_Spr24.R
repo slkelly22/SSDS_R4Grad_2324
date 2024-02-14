@@ -43,6 +43,9 @@ skimr::skim(urban_park)
 # dataset %>%
    #  function(variable)
 
+# What type of variable is Age in the dataset? 
+str(urban_park$Age)
+
 urban_park %>%
   count(Age)
 
@@ -58,8 +61,12 @@ View(sk_urban_park)
 sk_urban_park %>%
   count(police_response)
 
+7 == 5|7
+
 police_urban <- sk_urban_park %>%
   filter(police_response == TRUE)
+
+dim(police_urban)
 
 police_urban %>%
   count(Borough)
