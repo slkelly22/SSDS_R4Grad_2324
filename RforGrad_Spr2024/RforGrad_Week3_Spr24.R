@@ -2,7 +2,6 @@
 #Week 3
 #S.Kelly
 
-#New content
 #Rather than uploading an external dataset, we're going to use datasets that already exist within R packages
 #we need to install (if you don't have it) and load the fivethirtyeight package
 install.packages("fivethirtyeight")
@@ -28,7 +27,7 @@ head(fandango$film, 10) #you can even call head or tails on a particular variabl
 tail(fandango$film, 5)
 
 #Tidy functions / verbs to discuss today
-#we learned count() last week; not using count here because we have numerical data, not categorical groupings
+#we learned count() last time; not using count here because we have numerical data, not categorical groupings
 #new verbs: ARRANGE, SELECT, FILTER, MUTATE
 
 library(tidyverse)
