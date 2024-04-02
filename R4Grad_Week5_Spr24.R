@@ -1,5 +1,6 @@
-#R4Grad Week 5 Syntax - Plotting with ggplot2 continued
-# Spring 2024
+# R4Grad Week 5 Syntax 
+# Spring 2024 
+# ggplot continued - Histograms and Density Plots
 
 library(tidyverse)
 library(gapminder) 
@@ -15,17 +16,23 @@ ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g, co
 
 #what if we want to add a regression line? 
 ?geom_smooth
+args(geom_smooth)
 ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)) + geom_point() + geom_smooth(method = "lm")
 #you can turn off the standard errors with se = FALSE
 ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
 #why are we getting three different lines? Because what you identify in the aes() is passed down to the geoms that follow, but if you only want species to be represented in the point color but not in the lines, then move the color mapping out of the aes and into the geom_point()
 
+# No color
 ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g)) + geom_point() + geom_smooth(method = "lm")
 
+# No color or SE
 ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g)) + geom_point() + geom_smooth(method = "lm", se = FALSE)
 
-#here's how to retain the color mapping
-ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g)) + geom_point(mapping = aes(color = species)) + geom_smooth(method = "lm", se = FALSE)
+#Global mapping
+ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)) + geom_point() + geom_smooth(method = "lm")
+
+#Local mapping
+ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g)) + geom_point(mapping = aes(color = species)) + geom_smooth(method = "lm")
 
 #switching datasets
 library(gapminder)
@@ -33,6 +40,7 @@ View(gapminder)
 dim(gapminder)
 ?gapminder
 
+#this is gdp(logged) plotted with life expectancy with the continents represented in color
 ggplot(gapminder, mapping = aes(x = log(gdpPercap), y = lifeExp, color = continent)) + geom_point()
 
 gapminder %>%
@@ -40,23 +48,13 @@ gapminder %>%
   filter(continent == "Asia") %>%
   ggplot(mapping = aes(x = log(gdpPercap),y = lifeExp, color = country)) + geom_point(size = 3)
 
-#didn't show but move to next week
-gapminder %>%
-  filter(country == "Argentina") %>%
-  ggplot(mapping = aes(x = lifeExp, y = year)) + geom_line()
 
-#this is gdp(logged) plotted with life expectancy with the continents represented in color
-ggplot(gapminder, mapping = aes(x = log(gdpPercap), y = lifeExp, color = continent)) + geom_point()
-
-#let's look at the same information but just within a single continent and year and mapping to size of the population
+# Class Exercise
 gapminder %>%
   filter(continent == "Africa") %>%
   filter(year == 2007) %>%
   ggplot(mapping = aes(x = log(gdpPercap),y = lifeExp, color = country, size = pop)) + geom_point()
 
-gapminder %>%
-  filter(year == 2007) %>%
-  ggplot(mapping = aes(x = lifeExp)) + geom_histogram()
 
 #Histograms
 #a basic histogram
@@ -97,10 +95,7 @@ library(ggeasy)
 #let's make this look nicer
 #ggeasy allows us to remove the legends we don't want
 
-
 ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent)) + geom_density(alpha = 0.2) + labs(y = NULL, x = "Life Expectancy", fill = "Continent", title = "Worldwide Life Expectancy (1952 - 2007)", subtitle = "Gapminder Data") 
-
-ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent)) + geom_density(color = "blue") + labs(y = NULL, x = "Life Expectancy", fill = "Continent", title = "Worldwide Life Expectancy (1952 - 2007)", subtitle = "Gapminder Data") 
 
 library(ggeasy)
 ggplot(gapminder, mapping = aes(x = lifeExp, color = continent, fill = continent)) + geom_density(alpha = 0.4) + labs(y = NULL, x = "Life Expectancy", fill = "Continent", title = "Worldwide Life Expectancy (1952 - 2007)", subtitle = "Gapminder Data") + easy_remove_legend(alpha, color) + theme_minimal()
