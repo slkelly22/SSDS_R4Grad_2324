@@ -48,6 +48,12 @@ gapminder %>%
   filter(continent == "Asia") %>%
   ggplot(mapping = aes(x = log(gdpPercap),y = lifeExp, color = country)) + geom_point(size = 3)
 
+# To remove the legend
+gapminder %>%
+  filter(year == 2007) %>%
+  filter(continent == "Asia") %>%
+  ggplot(mapping = aes(x = log(gdpPercap),y = lifeExp, color = country)) + geom_point(size = 3) + theme(legend.position = "none") 
+
 
 # Class Exercise
 gapminder %>%
@@ -55,6 +61,11 @@ gapminder %>%
   filter(year == 2007) %>%
   ggplot(mapping = aes(x = log(gdpPercap),y = lifeExp, color = country, size = pop)) + geom_point()
 
+# without legend
+gapminder %>%
+  filter(continent == "Africa") %>%
+  filter(year == 2007) %>%
+  ggplot(mapping = aes(x = log(gdpPercap),y = lifeExp, color = country, size = pop)) + geom_point() + theme(legend.position = "none")
 
 #Histograms
 #a basic histogram
