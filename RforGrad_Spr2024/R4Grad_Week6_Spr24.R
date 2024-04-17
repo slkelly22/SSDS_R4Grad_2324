@@ -2,7 +2,7 @@
 
 library(tidyverse)
 library(gapminder) 
-#install.packages("usdata", "socviz")
+#install.packages(c("usdata", "socviz"))
 library(usdata)
 library(socviz)
 
