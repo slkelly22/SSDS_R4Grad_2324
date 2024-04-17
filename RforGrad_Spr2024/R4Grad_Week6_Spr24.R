@@ -2,8 +2,8 @@
 
 library(tidyverse)
 library(gapminder) 
-#install.packages("socviz")
-library(socviz)
+#install.packages("usdata")
+library(usdata)
 
 search() #to confirm packages are loaded
 
@@ -19,6 +19,7 @@ View(gapminder)
 gapminder %>%
   filter(country == "Mexico") %>%
   ggplot(mapping = aes(x = year, y = lifeExp)) + geom_line(color = "steelblue4", size = 5)
+
 #to pick out a color
 colors()
 #with labs
@@ -57,32 +58,30 @@ gapminder %>%
 
 #Boxplots
 #categorical and continuous variable
-#install.packages("socviz")
-library(socviz)
-data(package = "socviz")
-View(county_data)
-dim(county_data)
-county_data$hh_income  
-?county_data
-sum(is.na(county_data$hh_income)) #do we have any missing data?
+data(package = "usdata")
+View(county)
+dim(county)
+?county
+sum(is.na(county$median_hh_income)) #do we have any missing data?
 
 #Basic Boxplot
-county_data %>%
-  ggplot(mapping = aes(x = state, y = hh_income)) + geom_boxplot()
+county %>%
+  ggplot(mapping = aes(x = state, y = median_hh_income)) + geom_boxplot()
 
 #flipping the coordinates
-county_data %>%
-  ggplot(mapping = aes(x = state, y = hh_income)) + geom_boxplot() + coord_flip()
+county %>%
+  ggplot(mapping = aes(x = state, y = median_hh_income)) + geom_boxplot() + coord_flip() + labs(x = NULL, y = "Household Income")
 
 #reordering state by household income
-county_data %>%
-  drop_na() %>%
-  ggplot(mapping = aes(x = reorder(state, hh_income), y = hh_income)) + geom_boxplot() + coord_flip() + labs(x = NULL, y = "Household Income")
+county %>%
+  ggplot(mapping = aes(x = reorder(state, median_hh_income), y = median_hh_income)) + geom_boxplot() + coord_flip() + labs(x = NULL, y = "Household Income")
 
 #Geom_Bar and Geom_Col
 #Question: Is your data pre-counted or not? 
 #Not pre counted --> use geom_bar(), x = category
 #Pre counted --> use geom_col(), x = category, y = counted number
+
+library(socviz)
 
 county_data %>%
   ggplot(mapping = aes(x = census_region)) + geom_bar()
