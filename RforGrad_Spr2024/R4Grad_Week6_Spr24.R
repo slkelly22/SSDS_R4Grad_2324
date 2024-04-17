@@ -2,8 +2,9 @@
 
 library(tidyverse)
 library(gapminder) 
-#install.packages("usdata")
+#install.packages("usdata", "socviz")
 library(usdata)
+library(socviz)
 
 search() #to confirm packages are loaded
 
